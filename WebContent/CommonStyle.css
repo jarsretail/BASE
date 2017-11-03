@@ -1,0 +1,44 @@
+@CHARSET "ISO-8859-1";
+<html>
+<head>
+	<style>
+	
+	   .btn
+        {
+            background-color: #F49A1F;
+            color: white;
+        } 
+        
+        .btn
+        {
+            background-color: #F49A1F;
+            color: white;
+        }        
+        .header1
+        {
+            color: #F49A1F;
+        }
+        .li2:hover
+        {
+            background-color: aquamarine;
+            background-color: #F49A1F;
+            list-style-type: circle;
+                
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+                
+         }
+         
+         .nav1
+         {
+            background-color: #F49A1F;
+                
+         }
+         
+        
+    </style>
+	
+</head>
+</html>
