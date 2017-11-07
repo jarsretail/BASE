@@ -96,7 +96,7 @@ td {
 				Statement st;
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
-					con = DriverManager.getConnection("jdbc:mysql://localhost:3305/avenjars","root","mysql");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/avenjars","root","root");
 					//String query = "select * from jars_customer";
 					String query = "select * from jars_customer";
 					st = con.createStatement();
