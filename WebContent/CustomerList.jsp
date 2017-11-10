@@ -6,6 +6,8 @@
 
 <%@page import="java.sql.Connection" %>
 
+<%@page import="BaseConnectLib.BaseConnection" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +35,8 @@ function deleteRecord(id){
     var f=document.form;
     f.method="post";
     f.action='custdelete.jsp?id='+id;
-    f.submit();
+    f.submit(); 
+    MessageBox("Are you sure you want to delete");
 }
 function addRecord(){
     var f=document.form;
@@ -45,6 +48,12 @@ function ViewRecord(id){
     var f=document.form;
     f.method="post";
     f.action='CustomerWiseOrderList.jsp?id='+id;
+    f.submit();
+}
+function CreateOrder(id){
+    var f=document.form;
+    f.method="post";
+    f.action='OrderNew.jsp?id='+id;
     f.submit();
 }
 </script>
@@ -82,21 +91,19 @@ td {
 				<th>Pincode</th>
 				<th>Edit</th>
 				<th>Delete</th>
+				<th>Create Order</th>
 				<th>View</th>
 			</tr>
 			<%
 				Connection con = null;
-				//String url = "jdbc:mysql://localhost:3305/";
-				//String db = "test";
-				//String driver = "com.mysql.jdbc.Driver";
-				//String userName = "root";
-				//String password = "root";
 				String custid = null;
 				int sumcount = 0;
 				Statement st;
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/avenjars","root","root");
+					/* Class.forName("com.mysql.jdbc.Driver");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3305/avenjars","root","mysql"); */
+					BaseConnection basecon = new BaseConnection();
+					con= basecon.getConnection();
 					//String query = "select * from jars_customer";
 					String query = "select * from jars_customer";
 					st = con.createStatement();
@@ -121,8 +128,11 @@ td {
 				<td><input type="button" name="delete" value="Delete"
 					class="btn btn-success demo1"
 					onclick="deleteRecord(<%=rs.getString(1)%>);"></td>
-				<td><input type="button" name="delete" value="View Orders"
+				<td><input type="button" name="createorder" value="Create Order"
 					class="btn btn-info demo1"
+					onclick="CreateOrder(<%=rs.getString(1)%>);"></td>	
+				<td><input type="button" name="view" value="View Orders"
+					class="btn btn-warning demo1"
 					onclick="ViewRecord(<%=rs.getString(1)%>);"></td>	
 			</tr>
 			<%

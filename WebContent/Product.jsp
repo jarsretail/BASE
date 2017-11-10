@@ -1,3 +1,16 @@
+<%@page import="java.sql.*" %>
+
+<%@page import="java.io.*" %>
+
+<%@page import="javax.sql.*" %>
+
+<%@page import="java.sql.Connection" %>
+
+<%@page import="BaseConnectLib.BaseConnection" %>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +57,24 @@
                     </ul>
                     
         </div>  
+        
+        <%
+				/* Connection con=DriverManager.getConnection
+				("jdbc:mysql://localhost:3305/avenjars","root","mysql"); */
+				BaseConnection basecon = new BaseConnection();
+				Connection con= basecon.getConnection();
+			
+				Statement st=con.createStatement();
+			
+				String sql = "select product_id from jars_product";
+				
+				ResultSet rs=st.executeQuery(sql); 
+				int id=1; 
+				if(rs.last()){ 
+					id=rs.getInt("product_id")+1; 
+		}
+
+	%>
         <div class="col-sm-9">  
 				<h1 class="header1">Add Product Info</h1>
 				
@@ -51,7 +82,7 @@
 				<table>
 					<tr>
 						<td>Product Id :</td>
-						<td> <input type="text" name="productid" /><br /></td>
+						<td> <input type="text" name="productid" value='<%=id%>'/><br /></td>
 					</tr>	
 					<tr>
 						<td>Product Name :</td>
@@ -75,6 +106,9 @@
 					</tr>
 					<tr>			
 						<td><input class="btn btn1" type="submit" value="Add Details" /><br /></td>
+					</tr>
+					<tr>
+						<td><a href="ProductsList.jsp">List All Products</a> <br /></td>
 					</tr>
 				</table>
 				</form>

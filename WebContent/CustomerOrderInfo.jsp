@@ -6,6 +6,8 @@
 
 <%@page import="java.sql.Connection" %>
 
+<%@page import="BaseConnectLib.BaseConnection" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,7 +40,7 @@ function deleteRecord(id){
 function addProducts(id){
     var f=document.form;
     f.method="post";
-    f.action='insertProducts.jsp?id='+id;
+    f.action='SearchProduct.jsp?id='+id;
     f.submit();
 }
 
@@ -90,9 +92,12 @@ color: #333;
 				int sumcount = 0;
 				Statement st;
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/avenjars","root","root");
-					//String query = "select * from jars_customer";
+					/* Class.forName("com.mysql.jdbc.Driver");
+					con = DriverManager.getConnection("jdbc:mysql://local host:3305/avenjars","root","mysql");
+					 */
+					 BaseConnection basecon = new BaseConnection();
+					 con= basecon.getConnection();
+					 //String query = "select * from jars_customer";
 					String query = "select customer_id, customer_name, order_id, customer_phone, customer_email from jars_customer join jars_order ON jars_customer.customer_id = jars_order.cust_id";
 					st = con.createStatement();
 					ResultSet rs = st.executeQuery(query);

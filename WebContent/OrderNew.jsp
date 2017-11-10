@@ -7,6 +7,8 @@
 
 <%@page import="java.sql.Connection" %>
 
+<%@page import="BaseConnectLib.BaseConnection" %>
+
 <%@ page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -42,7 +44,8 @@
 	<%
 	String cid="";
 	if(session!=null)
-		 cid = session.getAttribute("CustId").toString();
+		 //cid = session.getAttribute("CustId").toString();
+	cid=request.getParameter("id");
 	 %>
 	 
 	 <%!
@@ -93,18 +96,22 @@
 
 	
 	<%
-		Connection con=DriverManager.getConnection
-		("jdbc:mysql://localhost:3306/avenjars","root","root");
-	
+		/* Connection con=DriverManager.getConnection
+		("jdbc:mysql://localhost:3305/avenjars","root","mysql");
+	 */
+	 BaseConnection basecon = new BaseConnection();
+	 Connection con= basecon.getConnection();
+
 		Statement st=con.createStatement();
 	
 		String sql = "select order_id from jars_order";
 		
 		ResultSet rs=st.executeQuery(sql); 
-		int id=0; 
+		int id=1; 
 		if(rs.last()){ 
 			id=rs.getInt("order_id")+1; 
 		}
+		out.println("Order id="+id);
 
 	%>
 	<div class="col-sm-9">

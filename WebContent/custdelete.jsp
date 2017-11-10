@@ -6,6 +6,8 @@
 
 <%@page import="java.sql.Connection" %>
 
+<%@page import="BaseConnectLib.BaseConnection" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +60,11 @@
         String id = request.getParameter("id");
         
 		int no = Integer.parseInt(id);
-		Connection con=DriverManager.getConnection
-		("jdbc:mysql://localhost:3306/avenjars","root","root");
-	
+		/* Connection con=DriverManager.getConnection
+		("jdbc:mysql://localhost:3305/avenjars","root","mysql");
+	 */
+		 BaseConnection basecon = new BaseConnection();
+		 Connection con= basecon.getConnection();
 		Statement st=con.createStatement();
 	
 		String sql = "select * from jars_customer where customer_id='" + id + "'";;

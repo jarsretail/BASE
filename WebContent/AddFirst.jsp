@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add</title>
+<title>Insert title here</title>
 </head>
 <body>
 <%
@@ -34,8 +34,7 @@ String phonenumber=request.getParameter("phonenumber");
 Class.forName("com.mysql.jdbc.Driver");
 
 Connection con=DriverManager.getConnection
-//atul
-("jdbc:mysql://localhost:3306/avenjars","root","root");
+("jdbc:mysql://localhost:3305/avenjars","root","mysql");
 
 Statement st=con.createStatement();
 

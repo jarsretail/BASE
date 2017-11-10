@@ -14,6 +14,14 @@
 <title>InsertProducts</title>
 
 <SCRIPT language="javascript">
+
+		function ViewOrder(id){
+		    var f=document.form;
+		    f.method="post";
+		    f.action='Invoice.jsp?id='+id;
+		    f.submit();
+		}
+
 		function addRow(tableID) {
 
 			var table = document.getElementById(tableID);
@@ -90,17 +98,18 @@
 
 </head>
 <body>
-<!-- <form action="AddProductsList.jsp" method="post" name="form"> -->
-<form action="Invoice.jsp" method="post" name="form">
+<form action="AddProductsList.jsp" method="post" name="form"> 
+<!-- <form action="Invoice.jsp" method="post" name="form"> -->
 <%
-        String id = request.getParameter("id");
-        int i= 1;
+       // String id = request.getParameter("id");
+        //int i= 1;
 		//int no = Integer.parseInt(id);
 	%>
 	<h1 class="header1">Add Products to Order</h1>
 	
-	<h3>Order Id :<%=id %></h3>
-	<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" class="btn btn-success" />
+	
+	
+	<!-- <INPUT type="button" value="Add Row" onclick="addRow('dataTable')" class="btn btn-success" />
 
 	<INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" class="btn btn-danger" />
 
@@ -122,10 +131,29 @@
 			<TD> <INPUT type="text" name="prodqnt"/> </TD>
 			<TD> <INPUT type="text" name="prodmrp"/> </TD>
 		</TR>
-	</TABLE>
+	</TABLE> -->
 	
-	<INPUT type="submit" value="Submit" class="btn btn1" />
 	
+	<h1 class="header">Search Product</h1>
+				<%String orderid = request.getParameter("id");
+				//out.println("Order id:"+orderid);
+				
+				session.setAttribute("OrderId",orderid);
+							 %>
+				<h3>Order Id :<%=orderid %></h3>
+				<table>
+				<tr>
+					<td>Search Product By Name :</td> 
+					<td><input type="text" name="SearchName" /><br /></td>
+				</tr>
+				
+				</table>
+	
+	 <INPUT type="submit" value="Submit" class="btn btn1" />
+	<%-- <input type="button" name="delete" value="Submit"
+					class="btn btn-info demo1"
+					onclick="ViewOrder(<%=id%>);">
+	 --%>
 </form>	
 </body>
 </html>

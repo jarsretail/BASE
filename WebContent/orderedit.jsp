@@ -6,6 +6,8 @@
 
 <%@page import="java.sql.Connection" %>
 
+<%@page import="BaseConnectLib.BaseConnection" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,15 +57,17 @@
         </div> 
         
         <%
-        String id = request.getParameter("id");
+        String orderid = request.getParameter("id");
         
-		int no = Integer.parseInt(id);
-		Connection con=DriverManager.getConnection
-		("jdbc:mysql://localhost:3306/avenjars","root","root");
+		int no = Integer.parseInt(orderid);
+		/* Connection con=DriverManager.getConnection
+		("jdbc:mysql://localhost:3305/avenjars","root","mysql"); */
+		BaseConnection basecon = new BaseConnection();
+		Connection con= basecon.getConnection();
 	
 		Statement st=con.createStatement();
 	
-		String sql = "select * from jars_order where order_id='" + id + "'";;
+		String sql = "select * from jars_order where order_id='" + orderid + "'";;
 		
 		ResultSet rs=st.executeQuery(sql); 
 		//int id=0; 
@@ -96,26 +100,32 @@
 				<table>
 	<tr>
 	<td>Order Id : </td>
-	<td><input type="text" name="orderid" value=<%=rs.getInt(1) %> /><br /></td>
+	<%-- <td><input type="text" name="orderid" value=<%=rs.getInt(1) %> /><br /></td> --%>
+	<td><%=rs.getInt(1) %></td>
 	</tr>
 	<tr>
 	<td>Customer Id : </td>
-	<td><input type="text" name="custid" value=<%=rs.getInt(2) %>></td>
-	<td><a href="SearchCustomer.html">Search Customer</a><br /></td>
+	<%-- <td><input type="text" name="custid" value=<%=rs.getInt(2) %>></td> --%>
+	<td><%=rs.getInt(2) %></td>
+	<!-- <td><a href="SearchCustomer.html">Search Customer</a><br /></td> -->
 	
 	</tr>
 	<tr>
 	<td>Order Date :</td>
-	<td><input id="date" type="date" name="orderdate" data-date="" data-date-format="YYYY MM DD" value=<%=rs.getString(3)%> /><br /></td>
-	</tr>
+<%-- 	<td><input id="date" type="date" name="orderdate" data-date="" data-date-format="YYYY MM DD" value=<%=rs.getString(3)%> /><br /></td>
+ --%>
+ 	<td><%=rs.getString(3) %></td>
+ 	</tr>
 	<tr>
 	<td>Order Time :</td>
-	<td><input type="text" name="ordertime" value=<%=rs.getString(4)%> /><br /></td>
+	<%-- <td><input type="text" name="ordertime" value=<%=rs.getString(4)%> /><br /></td> --%>
+	<td><%=rs.getString(4) %></td>
 	</tr>
 	<tr>
 	<!--Order Source :<input type="text" name="ordersource" /><br />-->
 	<td>Order Source :</td>
-	<td> <select name="ordersource">
+	<td><%=rs.getString(5) %></td>
+	<!-- <td> <select name="ordersource">
 					  <option>----Select Option---------</option>
 					  <option value="custapp">CustomerApp</option>
 					  <option value="whatsapp">WhatsApp</option>
@@ -123,7 +133,8 @@
 					  <option value="mail">Web Mail</option>
 			</select>
 					<br/>
-	</td>
+	</td> -->
+	
 	</tr>	
 	<tr>
 	<td>Order Status :</td>
@@ -140,7 +151,9 @@
 	<tr>
 		<td><input class="btn btn1" type="submit" value="Update" /><br /></td>
 	</tr>
-					<%} %>	
+					<%} 
+					session.setAttribute("OrderID", orderid);
+					%>	
 						
 				</table>
 				</form>

@@ -78,7 +78,8 @@
         </div>    
         <div class="col-sm-9">
 				<h1 class="header">Search Customer</h1>
-				<form action="SearchCust.jsp" method="post">
+				<!-- <form action="SearchCust.jsp" method="post"> -->
+				<form action="SearchedCustomers.jsp" method="post">
 				<table>
 				<tr>
 					<td>Search Customer By Name :</td> 
