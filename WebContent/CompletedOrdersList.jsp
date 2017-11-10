@@ -88,7 +88,7 @@ color: #333;
 				Statement st;
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
-					con = DriverManager.getConnection("jdbc:mysql://localhost:3305/avenjars","root","mysql");
+					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/avenjars","root","root");
 					//String query = "select * from jars_customer";
 					String query = "select customer_id, customer_name, order_id, customer_phone, order_status from jars_customer join jars_order ON jars_customer.customer_id = jars_order.cust_id where order_status = 'completed'";
 					st = con.createStatement();

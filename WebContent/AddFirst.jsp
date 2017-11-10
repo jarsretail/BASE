@@ -34,6 +34,7 @@ String phonenumber=request.getParameter("phonenumber");
 Class.forName("com.mysql.jdbc.Driver");
 
 Connection con=DriverManager.getConnection
+//atul
 ("jdbc:mysql://localhost:3306/avenjars","root","root");
 
 Statement st=con.createStatement();
